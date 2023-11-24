@@ -1,5 +1,6 @@
 package menu.controller;
 
+import java.util.List;
 import menu.view.InputView;
 import menu.view.OutputView;
 
@@ -7,6 +8,7 @@ public class RecommendController {
 
     private InputView inputView;
     private OutputView outputView;
+
 
     public RecommendController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
@@ -19,11 +21,12 @@ public class RecommendController {
         output();
     }
 
-    private void input(){
-
+    private void input() {
+        List<String> coachNames = inputView.inputCoachNames();
+        System.out.println(coachNames);
     }
 
-    private void output(){
+    private void output() {
 
     }
 }

@@ -1,4 +1,4 @@
 package menu.resource.menu;
 
-public enum Korean implements Menu {
+public class Korean implements Menu {
 }

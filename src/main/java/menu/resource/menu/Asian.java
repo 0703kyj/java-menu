@@ -1,4 +1,4 @@
 package menu.resource.menu;
 
-public enum Asian implements Menu {
+public class Asian implements Menu {
 }
