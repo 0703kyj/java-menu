@@ -1,13 +1,16 @@
 package menu.domain;
 
 import java.time.DayOfWeek;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import menu.exception.state.NotFoundDateException;
+import menu.resource.RecommendDate;
 
 public class Recommender {
 
-    private Map<String,String> categories;
+    public Map<String,String> categories;
 
     public Recommender() {
         this.categories = new HashMap<>();
@@ -30,8 +33,8 @@ public class Recommender {
         return true;
     }
 
-    public void recommendTodayMenu() {
-
+    public String getCategory(String dayOfWeek) {
+        return categories.get(dayOfWeek);
     }
 
     private boolean validateDuplicate(String category) {
@@ -43,5 +46,36 @@ public class Recommender {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+
+        StringBuilder result = new StringBuilder("[ 카테고리 | ");
+        List<String> categoryTitle = new ArrayList<>();
+        for (String recommendDate : RecommendDate.getRecommendDates()) {
+            String category = typeChange(categories.get(recommendDate));
+            categoryTitle.add(category);
+        }
+        result.append(String.join(" | ",categoryTitle));
+        result.append(" ]");
+
+        return result.toString();
+    }
+
+    private String typeChange(String category) {
+        if (category.equals("Japanese")) {
+            return "일식";
+        }
+        if (category.equals("Korean")) {
+            return "한식";
+        }
+        if (category.equals("Chinese")) {
+            return "중식";
+        }
+        if (category.equals("Asian")) {
+            return "아시안";
+        }
+        return "양식";
     }
 }

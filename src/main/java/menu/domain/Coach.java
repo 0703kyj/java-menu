@@ -6,10 +6,12 @@ import java.util.List;
 public class Coach {
     private String name;
     private List<String> cantNotEatMenus;
+    private List<String> recommendedMenus;
 
     public Coach(String name) {
         this.name = name;
         cantNotEatMenus = new ArrayList<>();
+        recommendedMenus = new ArrayList<>();
     }
 
     public String getName(){
@@ -21,6 +23,22 @@ public class Coach {
             return;
         }
         cantNotEatMenus.add(cantNotEatMenu);
+    }
+
+    public boolean updateRecommendedMenus(String recommendedMenu) {
+        if(recommendedMenus.contains(recommendedMenu)){
+            return false;
+        }
+        if (cantNotEatMenus.contains(recommendedMenu)) {
+            return false;
+        }
+        recommendedMenus.add(recommendedMenu);
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "[ "+name+" | "+String.join(" | ",recommendedMenus)+" ]";
     }
 
     @Override

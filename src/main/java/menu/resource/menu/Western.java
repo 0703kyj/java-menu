@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public enum Western {
-    라자냐, 그라탱, 뇨끼, 끼슈, 프렌치, 토스트, 바게트, 스파게티, 피자, 파니니;
+    라자냐, 그라탱, 뇨끼, 끼슈, 프렌치_토스트, 바게트, 스파게티, 피자, 파니니;
 
     private static final String TYPE = "Western";
 
@@ -17,7 +17,7 @@ public enum Western {
 
         for (Western menu : westernMenus) {
             Map<String, String> menuMatchType = new HashMap<>();
-            menuMatchType.put(menu.name(), TYPE);
+            menuMatchType.put(menu.name().replace("_"," "), TYPE);
             menus.add(menuMatchType);
         }
 

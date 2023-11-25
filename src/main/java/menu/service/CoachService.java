@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import menu.domain.Coach;
 import menu.exception.state.NotFoundCoachException;
-import menu.domain.Menu;
 
 public class CoachService {
     private List<Coach> coaches;
@@ -19,6 +18,10 @@ public class CoachService {
         for (String coachName : coachNames) {
             coaches.add(new Coach(coachName));
         }
+    }
+
+    public List<Coach> getCoaches(){
+        return coaches;
     }
 
     public List<String> getCoachNames(){
@@ -48,8 +51,8 @@ public class CoachService {
         throw new NotFoundCoachException();
     }
 
-    public boolean recommendFood(Menu menu){
-
-        return false;
+    public boolean recommendFood(String coachName, String menu){
+        Coach coach = findCoach(coachName);
+        return coach.updateRecommendedMenus(menu);
     }
 }

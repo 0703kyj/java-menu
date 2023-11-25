@@ -1,5 +1,6 @@
 package menu.domain;
 
+import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +45,24 @@ public class Menu {
             }
         }
         return false;
+    }
+
+    public String selectMenuByCategory(String category) {
+        List<String> menus = findMenuByCategory(category);
+        String menu = Randoms.shuffle(menus).get(0);
+
+        return menu;
+    }
+
+    private static List<String> findMenuByCategory(String category) {
+        List<String> findMenus = new ArrayList<>();
+        for (Map<String, String> menu : menus) {
+            List<String> keys = new ArrayList<>(menu.keySet());
+            if(menu.get(keys.get(0)).equals(category)){
+                findMenus.add(keys.get(0));
+            }
+        }
+        return findMenus;
     }
 
     private static boolean findMenu(Map<String, String> menu, String menuName) {

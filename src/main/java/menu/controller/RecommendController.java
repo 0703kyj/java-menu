@@ -1,6 +1,8 @@
 package menu.controller;
 
 import java.util.List;
+import menu.domain.Coach;
+import menu.resource.RecommendDate;
 import menu.service.CoachService;
 import menu.service.RecommenderService;
 import menu.view.InputView;
@@ -25,7 +27,24 @@ public class RecommendController {
         outputView.printStartMessage();
         input();
         recommenderService.setRecommendDates();
+        for (String dayOfWeek : RecommendDate.getRecommendDates()) {
+            recommendByDates(dayOfWeek);
+        }
         output();
+    }
+
+    private void recommendByDates(String dayOfWeek) {
+        for (String coachName : coachService.getCoachNames()) {
+            while(!recommendMenuToCoach(coachName, dayOfWeek));
+        }
+    }
+
+    private boolean recommendMenuToCoach(String coachName, String dayOfWeek) {
+        String menu = recommenderService.recommendTodayMenu(dayOfWeek);
+        if(!coachService.recommendFood(coachName, menu)){
+            return false;
+        }
+        return true;
     }
 
     private void input() {
@@ -47,6 +66,7 @@ public class RecommendController {
     }
 
     private void output() {
-
+        List<Coach> coaches = coachService.getCoaches();
+        outputView.printResult(coaches,recommenderService.getCategories());
     }
 }
